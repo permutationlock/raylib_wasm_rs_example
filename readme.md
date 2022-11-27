@@ -16,3 +16,10 @@ Finally, in order to get applications to fill the browser window and
 resize with it, we need to export an on_resize call back from Rust to
 JavaScript and set this function up as an event listener for the
 Browser's window resize event.
+
+## Dependencies
+
+In order to compile to native Unix and/or Windows systems it is
+assumed that you have the
+[Raylib](https://github.com/raysan5/raylib) library installed.
+The web server to test wasm builds requires [Go](https://go.dev).
