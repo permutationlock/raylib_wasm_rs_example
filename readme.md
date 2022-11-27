@@ -23,3 +23,13 @@ In order to compile to native Unix and/or Windows systems it is
 assumed that you have the
 [Raylib](https://github.com/raysan5/raylib) library installed.
 The web server to test wasm builds requires [Go](https://go.dev).
+
+## Building
+
+Building native applications should work as normal. In order to do a
+debug build for web simply run:
+```console
+cargo build --target wasm32-unknown-emscripten
+```
+You can then test your build using the included Go server and shell
+script.
