@@ -1,0 +1,83 @@
+<!doctypehtml>
+<html lang=en-us>
+
+<head>
+    <meta charset=utf-8>
+    <meta content="text/html; charset=utf-8" http-equiv=Content-Type>
+    <title>Raylib emscripten test</title>
+    <style>
+        * {
+            padding:0;
+            margin: 0;
+        }
+        canvas.emscripten {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas
+        class=emscripten
+        id=canvas
+        oncontextmenu=event.preventDefault()
+    >
+    </canvas>
+    <script>
+        function on_load() {
+            let on_resize = Module.cwrap(
+                "on_resize",
+                null,
+                ["number","number"]
+            );
+
+            window.addEventListener(
+                "resize",
+                () => {
+                    on_resize(window.innerWidth, window.innerHeight);
+                },
+                true
+            );
+
+            on_resize(window.innerWidth, window.innerHeight);
+        }
+
+        var Module = {
+            preRun: [],
+            postRun: [ on_load ],
+            print: (function() {
+                return function(text) {
+                    if (arguments.length > 1) {
+                        text = Array.prototype.slice.call(arguments)
+                            .join(' ');
+                    }
+                    console.log(text);
+                };
+            })(),
+            canvas: (function() {
+                let canvas = document.getElementById('canvas');
+
+                canvas.addEventListener(
+                    "webglcontextlost",
+                    function(e) {
+                        alert('WebGL context lost, reload the page.');
+                        e.preventDefault();
+                    },
+                    false
+                );
+
+                return canvas;
+            })(),
+        };
+
+        window.onerror = function() {
+            console.log("oh no!");
+        };
+    </script>
+    <script async
+        src="wasm_raylib_test.js"
+    ></script>
+</body>
+
+</html>
