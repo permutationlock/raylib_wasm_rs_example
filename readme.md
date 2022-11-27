@@ -4,7 +4,7 @@ The goal of this repository is to create a simple graphical Rust
 application that can be compiled to target native platforms and web
 browsers.
 
-To achieve this goal I use a
+To achieve cross-compilation with wasm I use a
 [Raylib](https://github.com/raysan5/raylib) library file compiled
 with [emcc](https://emscripten.org) and a Rust wrapper around some of
 Raylib's functionality.
