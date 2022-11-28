@@ -1,11 +1,16 @@
 # Test Server
 
-A simple Go server and shell script to test the web debug build.
+A simple Go server and shell script to test web builds.
 
-Runnning:
+Running the associated script should copy your output files to the
+static folder and host the application at
+[http://localhost:8081/](http://localhost:8081/).
 
+Testing debug build:
 ```console
 ./debug_server.sh
 ```
-should copy your debug output files to the static folder and host
-a server on [http://localhost:8081/](http://localhost:8081/).
+Testing release build:
+```console
+./release_server.sh
+```
